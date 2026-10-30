@@ -1,0 +1,21 @@
+# 运行时生成的数据与配置（首次运行会自动创建）
+stocks.json
+cache/
+stock_monitor.log
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 本地测试产物
+tests/_web_tmp_*/
+tests/_*
+*.zip

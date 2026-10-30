@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>股票监控 · 网页版</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">📈</span>
+    <span class="title">股票监控</span>
+    <span id="phase" class="badge">—</span>
+    <span id="conn" class="conn">连接中…</span>
+  </div>
+  <div class="topright">
+    <span id="stamp" class="stamp"></span>
+    <button id="btn-refresh" class="btn ghost" title="立即刷新">⟳</button>
+    <span id="ver" class="ver"></span>
+  </div>
+</header>
+
+<div id="commo" class="commo" hidden></div>
+
+<main class="layout">
+  <aside class="side">
+    <div class="side-head">
+      <input id="add-input" class="input" placeholder="代码 / 名称 / 拼音首字母，回车添加">
+      <button id="btn-add" class="btn">添加</button>
+    </div>
+    <div class="side-tools">
+      <span id="side-count" class="dim"></span>
+      <span class="grow"></span>
+      <button id="btn-up" class="btn tiny ghost" title="上移">↑</button>
+      <button id="btn-down" class="btn tiny ghost" title="下移">↓</button>
+      <button id="btn-del" class="btn tiny ghost danger" title="从自选删除">－</button>
+    </div>
+    <div class="table-wrap" id="wl-wrap">
+      <table id="wl" class="wl">
+        <thead>
+          <tr>
+            <th data-sort="name" class="col-name">名称</th>
+            <th data-sort="code" class="hide-sm col-code">代码</th>
+            <th data-sort="price" class="num col-price">现价</th>
+            <th data-sort="change" class="num hide-sm col-change">涨跌</th>
+            <th data-sort="pct" class="num col-pct">涨跌幅</th>
+            <th data-sort="main_net" class="num hide-sm col-main">主力</th>
+          </tr>
+        </thead>
+        <tbody id="wl-body"></tbody>
+      </table>
+    </div>
+  </aside>
+
+  <div class="splitter" id="splitter" title="拖动调整自选栏宽度"></div>
+
+  <section class="main">
+    <div class="toolbar">
+      <div id="periods" class="periods"></div>
+      <button id="btn-adjust" class="btn ghost" title="循环切换复权">前复权</button>
+      <button id="btn-holdings" class="btn ghost" hidden>🏦 持仓</button>
+      <span class="grow"></span>
+      <span id="chart-hint" class="dim hint">滚轮缩放 · 拖动平移 · 双击复位</span>
+    </div>
+
+    <div class="chart-box">
+      <canvas id="chart"></canvas>
+      <div id="tip" class="tip" hidden></div>
+    </div>
+
+    <div class="panel-title"><span id="flow-title">主力净流入（近 20 日）</span><span id="flow-note" class="warn"></span></div>
+    <div class="flow-box"><canvas id="flow"></canvas></div>
+
+    <div id="holdings-box" class="holdings" hidden>
+      <div class="panel-title">
+        <span id="holdings-title">ETF 持仓</span>
+        <span class="grow"></span>
+        <button id="btn-holdings-mode" class="btn tiny ghost">全部持仓</button>
+      </div>
+      <div class="table-wrap short">
+        <table class="wl" id="holdings-table">
+          <thead>
+            <tr>
+              <th data-hsort="name">名称</th>
+              <th data-hsort="code">代码</th>
+              <th data-hsort="weight" class="num">权重</th>
+              <th data-hsort="price" class="num">现价</th>
+              <th data-hsort="change" class="num">涨跌</th>
+              <th data-hsort="pct" class="num">涨跌幅</th>
+              <th data-hsort="contrib" class="num">贡献</th>
+            </tr>
+          </thead>
+          <tbody id="holdings-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="statusbar">
+  <span id="status-left">准备中…</span>
+  <span class="grow"></span>
+  <span id="status-right"></span>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
